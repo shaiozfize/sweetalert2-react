@@ -30,6 +30,7 @@ const ALLOWS_KEYS = [
   'inputValue',
   'inputPlaceholder',
   'showLoaderOnConfirm',
+  'preConfirm'
 ];
 
 const REMOVED_KEYS = ['timer', 'allowOutsideClick', 'allowEscapeKey', 'closeOnConfirm', 'closeOnCancel'];
@@ -116,7 +117,7 @@ export const withSwalInstance = swalInstance =>
       inputPlaceholder: PropTypes.string,
       inputValue: PropTypes.string,
       showLoaderOnConfirm: PropTypes.bool,
-
+      preConfirm: PropTypes.func,
       // custom option
       show: PropTypes.bool,
       onConfirm: PropTypes.func,
@@ -151,7 +152,7 @@ export const withSwalInstance = swalInstance =>
       inputPlaceholder: null,
       inputValue: null,
       showLoaderOnConfirm: false,
-
+      preConfirm: null,
       // custom option
       show: false,
     };
@@ -207,7 +208,7 @@ export const withSwalInstance = swalInstance =>
           .then(
             (result) => {
               if (result.value) {
-                this.handleClickConfirm(onConfirm);
+                this.handleClickConfirm(onConfirm, result);
               } else {
                 this.handleClickCancel(onCancel, result.dismiss);
               }
